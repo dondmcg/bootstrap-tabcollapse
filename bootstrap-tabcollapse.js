@@ -135,11 +135,15 @@
             $selector.find('[data-toggle="tab"], [data-toggle="pill"]').each(function() {
                 var $el = $(this);
                 var href = $el.attr('href') + '-collapse';
+
                 $el.attr({
                     'data-toggle-was': $el.attr('data-toggle'),
                     'data-toggle': 'collapse',
-                    'data-parent': '#' + parentId,
                     href: href
+                });
+            if(!this.options.operate_independantly)
+                $el.attr({
+                    'data-parent': '#' + parentId,
                 });
             });
         }
@@ -161,9 +165,13 @@
         $heading.addClass('js-tabcollapse-panel-heading ' + (active ? '' : 'collapsed'));
         $heading.attr({
             'data-toggle': 'collapse',
-            'data-parent': '#' + parentId,
             'href': '#' + groupId
         });
+        if( !this.options.operate_independantly ) {
+          $heading.attr({
+            'data-parent': '#' + parentId
+          });
+        }
         return $heading;
     };
 
